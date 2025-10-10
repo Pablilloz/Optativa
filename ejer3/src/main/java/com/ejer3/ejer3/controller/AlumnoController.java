@@ -3,6 +3,7 @@ package com.ejer3.ejer3.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,13 +35,14 @@ public class AlumnoController {
 	}
 
 	@GetMapping("/{email}")
-	public Alumno getUsername(@PathVariable String username) {
+	public ResponseEntity<Alumno> getUsername(@PathVariable String username) {
 		for (Alumno Alumno : ListaAlumnos) {
 			if (Alumno.getEmail().equalsIgnoreCase(username)) {
-				return Alumno;
+				return ResponseEntity.ok(Alumno);
 			}
 		}
-		return null;
+		return ResponseEntity.notFound().build();
 	}
 
+	
 }
